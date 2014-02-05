@@ -94,6 +94,12 @@ namespace StudentNotifier.Controllers
             var courses = sn.Courses.Where(m => m.SemesterNo.Equals(id) && m.Teacher.Equals(name)).Select(a => a).ToList();
             return this.Json(courses, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult GetCourses2(int id,String name)
+        {
+            //String name = Request["FullName"];
+            var courses = sn.Courses.Where(m => m.SemesterNo.Equals(id) && m.Teacher.Equals(name)).Select(a => a).ToList();
+            return this.Json(courses, JsonRequestBehavior.AllowGet);
+        }
         protected override void Dispose(bool disposing)
         {
             sn.Dispose();

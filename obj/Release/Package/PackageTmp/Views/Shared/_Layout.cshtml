@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>@ViewBag.Title</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="tech layer, free template, one page layout" />
+<meta name="description" content="Tech Layer is free one-page template layout by templatemo.com using colorful navigations and darkgray background." />
+<link href="~/Content/templatemo_style.css" type="text/css" rel="stylesheet" /> 
+<script type="text/javascript" src="~/Scripts/jquery.min.js"></script> 
+<script type="text/javascript" src="~/Scripts/jquery.scrollTo-min.js"></script> 
+<script type="text/javascript" src="~/Scripts/jquery.localscroll-min.js"></script> <script src="~/Scripts/jquery-1.8.2.js"></script>
+<script type="text/javascript" src="~/Scripts/init.js"></script>  
+<link rel="stylesheet" href="~/Content/slimbox2.css" type="text/css" media="screen" /> 
+<script type="text/JavaScript" src="~/Scripts/slimbox2.js"></script> 
+<script language="javascript" type="text/javascript">
+    function clearText(field) {
+        if (field.defaultValue == field.value) field.value = '';
+        else if (field.value == '') field.value = field.defaultValue;
+    }
+</script>
+</head> 
+<body> 
+
+<div id="templatemo_header_wrapper">
+	<div id="templatemo_header">
+    	<div id="site_title"><a rel="nofollow">Student Notifier</a></div>
+        <a class="templatemo_header_bg" href="http://nl.azimage.com"   target="_blank"><img src="~/images/header.png"  title="nl.azimage.com" /></a>
+    </div>
+</div>
+    @RenderBody()
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+    <div id="templatemo_footer_wrapper">
+	<div id="templatemo_footer">
+    	<p>Copyright © 2014 <a href="#">Punjab University College of Information Technology</a> | <a rel="nofollow" href="http://www.pucit.edu.pk">PUCIT</a></p>
+    </div>
+</div>
+    </div>
+</body> 
+@Scripts.Render("~/bundles/jquery")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#semesterSelector").change(function () {
+                var semesterId = $("#semesterSelector").val();
+
+                  $("#teacherSelctor option").remove();
+
+
+                $.getJSON("/home/GetTeachers?id=" + semesterId, function (data) {
+                    $("#teacherSelctor").append('<option>-Select Teacher-</option>');
+                    $.each(data, function (i, item) {
+                        $("#teacherSelctor").append('<option value="' + item.Teacher + '">' + item.Teacher + '</option>');
+                        //alert('Id = ' + item.Id + " Name = " + item.Name);
+                    });
+
+                });
+
+            });
+
+        });
+        $(document).ready(function () {
+            $("#teacherSelctor").change(function () {
+                var semesterId = $("#semesterSelector").val();
+                var name = $("#teacherSelctor").val();
+
+                $("#courseSelctor option").remove();
+
+
+                $.getJSON("/home/GetCourses?id=" + semesterId +"&name="+name, function (data) {
+                    $("#courseSelctor").append('<option>-Select Course-</option>');
+                    $.each(data, function (i, item) {
+                        $("#courseSelctor").append('<option value="' + item.Courses + '">' + item.Courses + '</option>');
+                        //alert('Id = ' + item.Id + " Name = " + item.Name);
+                    });
+
+                });
+
+            });
+
+        });
+        $(document).ready(function () {
+            $("#semSelctor").change(function () {
+                var semesterId = $("#semSelector").val();
+
+                $("#courseSelctor option").remove();
+
+
+                $.getJSON("/home/GetCourses?id=" + semesterId + "&name=" @Model.FullName, function (data) {
+                    $("#courseSelctor").append('<option>-Select Course-</option>');
+                    $.each(data, function (i, item) {
+                        $("#courseSelctor").append('<option value="' + item.Courses + '">' + item.Courses + '</option>');
+                        //alert('Id = ' + item.Id + " Name = " + item.Name);
+                    });
+
+                });
+
+            });
+
+        });
+</script>
+</html>

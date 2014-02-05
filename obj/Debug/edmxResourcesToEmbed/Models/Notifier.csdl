@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="StudentNotifierModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="StudentNotifierEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Logins" EntityType="StudentNotifierModel.Login" />
+    <EntitySet Name="Notifications" EntityType="StudentNotifierModel.Notification" />
+    <EntitySet Name="Students" EntityType="StudentNotifierModel.Student" />
+    <EntitySet Name="Teachers" EntityType="StudentNotifierModel.Teacher" />
+    <AssociationSet Name="FK_LogID" Association="StudentNotifierModel.FK_LogID">
+      <End Role="Login" EntitySet="Logins" />
+      <End Role="Students" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TLogId" Association="StudentNotifierModel.FK_TLogId">
+      <End Role="Login" EntitySet="Logins" />
+      <End Role="Teacher" EntitySet="Teachers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TID" Association="StudentNotifierModel.FK_TID">
+      <End Role="Teacher" EntitySet="Teachers" />
+      <End Role="Notification" EntitySet="Notifications" />
+    </AssociationSet>
+    <EntitySet Name="Courses" EntityType="StudentNotifierModel.Cours" />
+  </EntityContainer>
+  <EntityType Name="Login">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="password" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="FullName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="type" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Students" Relationship="StudentNotifierModel.FK_LogID" FromRole="Login" ToRole="Students" />
+    <NavigationProperty Name="Teachers" Relationship="StudentNotifierModel.FK_TLogId" FromRole="Login" ToRole="Teacher" />
+  </EntityType>
+  <EntityType Name="Notification">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="TId" Type="Int32" />
+    <Property Name="Course" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="notification1" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="filePath" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Teacher" Relationship="StudentNotifierModel.FK_TID" FromRole="Notification" ToRole="Teacher" />
+    <Property Type="Int32" Name="semester" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="LogID" Type="Int32" />
+    <Property Name="RollNo" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="FullName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Courses" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Login" Relationship="StudentNotifierModel.FK_LogID" FromRole="Students" ToRole="Login" />
+    <Property Type="Int32" Name="Semester" />
+  </EntityType>
+  <EntityType Name="Teacher">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="LogID" Type="Int32" />
+    <Property Name="username" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="FullName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Courses" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Login" Relationship="StudentNotifierModel.FK_TLogId" FromRole="Teacher" ToRole="Login" />
+    <NavigationProperty Name="Notifications" Relationship="StudentNotifierModel.FK_TID" FromRole="Teacher" ToRole="Notification" />
+  </EntityType>
+  <Association Name="FK_LogID">
+    <End Role="Login" Type="StudentNotifierModel.Login" Multiplicity="0..1" />
+    <End Role="Students" Type="StudentNotifierModel.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Login">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Students">
+        <PropertyRef Name="LogID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TLogId">
+    <End Role="Login" Type="StudentNotifierModel.Login" Multiplicity="0..1" />
+    <End Role="Teacher" Type="StudentNotifierModel.Teacher" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Login">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Teacher">
+        <PropertyRef Name="LogID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TID">
+    <End Role="Teacher" Type="StudentNotifierModel.Teacher" Multiplicity="0..1" />
+    <End Role="Notification" Type="StudentNotifierModel.Notification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Notification">
+        <PropertyRef Name="TId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Cours">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Int32" Name="SemesterNo" Nullable="false" />
+    <Property Type="String" Name="Courses" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Teacher" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+</Schema>

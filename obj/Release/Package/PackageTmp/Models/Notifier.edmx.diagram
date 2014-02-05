@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bc9ead1a0cd742978bcbf6320b5e411e" Name="Diagram1">
+        <EntityTypeShape EntityType="StudentNotifierModel.Login" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentNotifierModel.Notification" Width="1.5" PointX="5.25" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentNotifierModel.Student" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentNotifierModel.Teacher" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <AssociationConnector Association="StudentNotifierModel.FK_LogID" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentNotifierModel.FK_TLogId" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentNotifierModel.FK_TID" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="StudentNotifierModel.Cours" Width="1.5" PointX="4.3448583336290243" PointY="29.829312398018928" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

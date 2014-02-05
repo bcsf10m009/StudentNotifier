@@ -36,20 +36,20 @@ namespace StudentNotifier.Controllers
             String teachr = Request["teacherSelctor"];
             String course = Request["courseSelctor"];
             not.AddSCourse(course,log);
-            return View("Student");
+            return View("Student",log);
         }
         public ActionResult AddCourse(Login log)
         {
             int semestr = int.Parse(Request["semester"]);
             String course = Request["course"];
             not.AddSCourseForTeacher(course , semestr, log);
-            return View("Teacher");
+            return View("Teacher",log);
         }
         [HttpPost]
-        public ActionResult SaveNotification(Login log)
+        public ActionResult SaveNotification(int id)
         {
-            String semes = Request["semSelector"];
-            String course = Request["courseSelctor"];
+            String semes = Request["semSelctor"];
+            String course = Request["courseSlctr"];
             String notification = Request["notification"];
             String filePath = "";
             for (int i = 0; i < Request.Files.Count; i++)
@@ -58,9 +58,10 @@ namespace StudentNotifier.Controllers
                 file.SaveAs(Server.MapPath(@"~\Files\" + file.FileName));
                 filePath = @"\Files\" + file.FileName;
             }
-            not.saveNotification(notification, int.Parse(semes), filePath, log);
+            Login log = sn.Logins.Find(id);
+            not.saveNotification(notification, int.Parse(semes), course, filePath ,log);
 
-            return View("Index");
+            return View("Teacher",log);
         }
     }
 }
