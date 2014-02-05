@@ -13,6 +13,8 @@
         <AssociationConnector Association="StudentNotifierModel.FK_TLogId" ManuallyRouted="false" />
         <AssociationConnector Association="StudentNotifierModel.FK_TID" ManuallyRouted="false" />
         <EntityTypeShape EntityType="StudentNotifierModel.Cours" Width="1.5" PointX="4.3448583336290243" PointY="29.829312398018928" />
+        <EntityTypeShape EntityType="StudentNotifierModel.StuCours" Width="1.5" PointX="7.25" PointY="2.875" />
+        <AssociationConnector Association="StudentNotifierModel.FK_SId" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

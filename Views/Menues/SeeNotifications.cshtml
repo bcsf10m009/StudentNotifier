@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+@model List<StudentNotifier.Models.Notification>
+@{
+    ViewBag.Title = "See Notifications";
+}
+<html xmlns="http://www.w3.org/1999/xhtml">
+<div><strong></strong></div>
+
+<div id="templatemo_main_wrapper">
+    <div id="templatemo_main">
+        <div id="content">
+            <div id="home" class="section">
+                <div class="home_box left">
+                    <div class="section section_with_padding" id="testimonial">
+                        <h1>See Notifications</h1>
+                        @foreach (var i in Model)
+                        {	
+                            <h2>Course: </h2>@i.Course 
+                                <div>
+                                    Notification: <p>@i.notification1</p>
+                                </div>
+                            <div>@if(i.filePath != null){
+                                      <a href="/Files/@i.filePath">Download File</a>
+                            }
+                            </div>
+                            <div>Teacher: @i.Teacher.FullName</div>
+                        }
+                        <a href="~/Menues/Student/" class="home_btn">home</a>
+                        <a href="~/Menues/Student/#gallery" class="page_nav_btn previous">Previous</a>
+                        <a href="~/Menues/Student/#contact" class="page_nav_btn next">Next</a>
+                    </div>
+                    <!-- END of Testimonial -->
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>
